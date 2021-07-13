@@ -44,10 +44,7 @@
     "requires": {
       "db": {
         "kind": "sqlite",
-        "model": "*",
-        "credentials": {
-          "database": "slah.db"
-        }
+        "model": "*"
       }
     }
   }

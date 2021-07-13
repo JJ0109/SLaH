@@ -42,7 +42,7 @@ entity geraet : managed
     Betriebsanleitung : String(100);
     Video : String(100);
     //Test
-    geraeteid :  Association to many geraeteid on geraeteid.geraet = $self;
+    geraeteid :  Association to many geraeteid on geraeteid.geraet = $self; 
 }
 
 entity geraeteid : managed
@@ -54,6 +54,7 @@ entity geraeteid : managed
     Geraetestatus : String(30);
     //Test
     geraet : Association to geraet;
+    linkgeraetid: Association to many gverbindung on linkgeraetid.geraetid = $self; 
 }
 
 entity geraetebox : managed
@@ -66,6 +67,7 @@ entity geraetebox : managed
     //Test
     patient: Association to many patient on patient.box = $self;
     status: Association to geraeteboxstatus;
+    linkbox: Composition of many gverbindung on linkbox.box = $self;
 }
 
 entity geraeteboxstatus : managed
@@ -77,6 +79,11 @@ entity geraeteboxstatus : managed
     BoxStatus : String(30);
 }
 
+//Liste aller Geräte in einer Box 
+entity gverbindung{
+    key box : Association to geraetebox;
+    key geraetid : Association to geraeteid;  
+}
 
 //Type Geschlecht
 type Gender : String enum {
