@@ -1,0 +1,2 @@
+﻿UserId,PatientenID,VersichertenNr,GesetzVers,PatientNrKIS,Anrede,Titel,Vorname,Nachname,GebDatum,Geschlecht,Land,Postleitzahl,Ort,Strasse,Hausnr,Zusatz,Postfach,Telefonnummer,Mobilnummer,Fax,Email,Datenschutz1,LastChangedDatenschutz
+123,395289359,3958923083,true,H3223598,Frau,Dr.,Heidi,Maier,1910-06-02,w,DE,43953,Stuttgart,Hauptstraße,1,,,0714174839,017617483,,test@test.com,true,1910-06-02

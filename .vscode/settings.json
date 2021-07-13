@@ -1,0 +1,15 @@
+{
+  "files.exclude": {
+    "**/.gitignore": true,
+    "**/.git": true,
+    "**/.vscode": true
+},
+"sqltools.connections": [
+    {
+        "dialect": "SQLite",
+        "name": "MySlahConnection",
+        "database": "/home/user/slah/slah.db"
+    }
+],
+"actions": []
+}
