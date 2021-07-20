@@ -1,10 +1,9 @@
 namespace slah.db;
 
-using {managed} from '@sap/cds/common';
+using {managed, cuid} from '@sap/cds/common';
 
-entity patient : managed
+entity patient : managed, cuid
 {
-    key UserID : UUID not null;
     PatientenID : String(15) not null;
     VersichertenNr : String(20) not null;
     GesetzVers : Boolean;
@@ -32,9 +31,9 @@ entity patient : managed
     box : Association to geraetebox;
 }
 
-entity geraet : managed
+entity geraet : managed, cuid
 {
-    key GeraeteUUID : UUID;
+    // key GeraeteUUID : UUID; //erstetzt durch aspect "cuid"
     key GeraeteNr : String(10) not null;
     Bezeichnung : String(100);
     Eigenschaften : String(100);
@@ -45,9 +44,9 @@ entity geraet : managed
     geraeteid :  Association to many geraeteid on geraeteid.geraet = $self; 
 }
 
-entity geraeteid : managed
+entity geraeteid : managed, //cuid
 {
-    key GeraeteIdUUID : UUID;
+    key GeraeteIdUUID : UUID; //ersetzt durch aspect "cuid"
     key GeraeteId : String(10) not null;
     //GeraeteNr : String(18) not null;
     Betriebsstunden : Time;
@@ -90,7 +89,7 @@ type Gender : String enum {
     w; m; d;
 }
 
-//Typ Länder
+//Typ Länder --> über common aspects
 //Typ Status
 //Type Link einfügen
 //Typ nur Stundenzahl anzeigen

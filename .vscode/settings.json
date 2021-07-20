@@ -4,12 +4,6 @@
     "**/.git": true,
     "**/.vscode": true
 },
-"sqltools.connections": [
-    {
-        "dialect": "SQLite",
-        "name": "MySlahConnection",
-        "database": "/home/user/slah/slah.db"
-    }
-],
+"sqltools.connections": [],
 "actions": []
 }
