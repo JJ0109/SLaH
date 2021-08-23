@@ -1,0 +1,106 @@
+_schema-version: "3.2"
+ID: SLaH-1-1
+version: 0.0.1
+modules:
+- name: SLaH-1-1-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: SLaH-1-1-destination-service
+    parameters:
+      content-target: true
+  - name: SLaH-1-1_html_repo_host
+    parameters:
+      service-key:
+        name: SLaH-1-1_html_repo_host-key
+  - name: uaa_SLaH-1-1
+    parameters:
+      service-key:
+        name: uaa_SLaH-1-1-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: Patientenmanager_SLaH_1_1_html_repo_host
+          ServiceInstanceName: SLaH-1-1-html5-app-host-service
+          ServiceKeyName: SLaH-1-1_html_repo_host-key
+          sap.cloud.service: Patientenmanager
+        - Authentication: OAuth2UserTokenExchange
+          Name: Patientenmanager_uaa_SLaH_1_1
+          ServiceInstanceName: SLaH-1-1-xsuaa-service
+          ServiceKeyName: uaa_SLaH-1-1-key
+          sap.cloud.service: Patientenmanager
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: SLaH-1-1-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: SLaH-1-1_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - patientenverwaltung.zip
+      name: patientenverwaltung
+      target-path: resources/
+    - artifacts:
+      - gereateverwaltung.zip
+      name: gereateverwaltung
+      target-path: resources/
+- name: patientenverwaltung
+  type: html5
+  path: app/patientenverwaltung
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: gereateverwaltung
+  type: html5
+  path: app/gereateverwaltung
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: SLaH-1-1-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: SLaH-1-1-destination-service
+    service-plan: lite
+- name: SLaH-1-1_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: SLaH-1-1-html5-app-host-service
+    service-plan: app-host
+- name: uaa_SLaH-1-1
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: SLaH-1-1-xsuaa-service
+    service-plan: application
+parameters:
+  deploy_mode: html5-repo

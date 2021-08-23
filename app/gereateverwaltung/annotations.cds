@@ -1,0 +1,1 @@
+using catalogservice as service from '../../srv/slahservice';

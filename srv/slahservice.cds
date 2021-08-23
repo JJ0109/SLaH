@@ -5,8 +5,8 @@ service catalogservice {
 
     entity PatientenSet        as projection on slah.patient;
     entity GeraetSet           as projection on slah.geraet;
-    entity GeraeteIdSet        as projection on slah.geraeteid;
-    entity GeraeteboxSet       as projection on slah.geraetebox;
-    entity GeraeteboxStatusSet as projection on slah.geraeteboxstatus;
+    //entity GeraeteIdSet        as projection on slah.geraeteid;
+    //entity GeraeteboxSet       as projection on slah.geraetebox;
+    //entity GeraeteboxStatusSet as projection on slah.geraeteboxstatus;
 
 }

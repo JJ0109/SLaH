@@ -10,6 +10,7 @@
     "express": "^4"
   },
   "devDependencies": {
+    "@sap/ux-specification": "^1.90.4",
     "sqlite3": "^5.0.2"
   },
   "scripts": {
@@ -44,8 +45,15 @@
     "requires": {
       "db": {
         "kind": "sqlite",
-        "model": "*"
+        "model": "*",
+        "credentials": {
+          "database": "slah.db"
+        }
       }
     }
-  }
+  },
+  "sapux": [
+    "app/patientenverwaltung",
+    "app/gereateverwaltung"
+  ]
 }
