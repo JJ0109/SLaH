@@ -1,30 +1,162 @@
 using catalogservice as service from '../../srv/slahservice';
 
-annotate catalogservice.PatientenSet with @UI : {
-    LineItem:[
+using from '../../srv/common';
+
+
+//Masterpage - List Report
+annotate catalogservice.PatientenSet with @(UI : {
+    LineItem : [
+        {
+        Label : 'GUUID',
+        Value : ID,
+        ![@UI.Hidden] : true
+        },
+    {
+        Label : 'ID',
+        Value : PatientenID,
+    },
+    {
+        Label : 'Anrede',
+        Value : Anrede_code,
+    },
+    {
+        Label : 'Vorname',
+        Value : Vorname,
+    },
+    {
+        Label : 'Nachname',
+        Value : Nachname,
+    },
+    {
+        Label : 'Geburtsdatum',
+        Value : GebDatum,
+    },
+    {
+        Label : 'Geschlecht',
+        Value : Geschlecht_code1,
+    },
+    {
+        Label : 'VersichertenNr',
+        Value : VersichertenNr,
+    },
+    {
+        Label : 'GesetzVers',
+        Value : GesetzVers,
+    },
+    {
+        Label : 'PatientNrKIS',
+        Value : PatientNrKIS,
+    },
+    {
+        Label : 'Titel',
+        Value : Titel,
+    },
+    {
+        Label : 'Land',
+        Value : Land_code2,
+    },
+    {
+        Label : 'Postleitzahl',
+        Value : Postleitzahl,
+    },
+    {
+        Label : 'Ort',
+        Value : Ort,
+    },    
+    {
+        Label : 'Strasse',
+        Value : Strasse,
+    },
+        {
+        Label : 'Hausnr',
+        Value : Hausnr,
+    },
+        {
+        Label : 'Zusatz',
+        Value : Zusatz,
+    },  
+        {
+        Label : 'Postfach',
+        Value : Postfach,
+    },  
+        {
+        Label : 'Telefonnummer',
+        Value : Telefonnummer,
+    },
+    {
+        Label : 'Mobilnummer',
+        Value : Mobilnummer,
+    },
+        {
+        Label : 'Fax',
+        Value : Fax,
+    },
+        {
+        Label : 'Email',
+        Value : Email,
+    },
+        {
+        Label : 'Datenschutz1',
+        Value : Datenschutz1,
+    },
+        {
+        Label : 'LastChangedDatenschutz',
+        Value : LastChangedDatenschutz,
+    }
+],
+
+
+//Masterpage - Überschrift
+HeaderInfo          : {
+        TypeName       : 'Patient',
+        TypeNamePlural : 'Patienten',
+        Title          : {
+            $Type : 'UI.DataField',
+            Value : Nachname
+        },
+        Description    : {
+            $Type : 'UI.DataField',
+            Value : Vorname
+        },
+    },
+
+
+//ObjectPage - Details zum Patienten
+Facets: [
             {
-                Label:'ID',
-                Value:PatientenID,
-            },
-            {
-                Label:'Anrede',
-                Value:Anrede,
-            },
-            {
-                Label:'Vorname',
-                Value:Vorname,
-            },
-            {
-                Label:'Nachname',
-                Value:Nachname,
-            },
-            {
-                Label:'Geburtsdatum',
-                Value:GebDatum,
-            },
-            {
-                Label:'Geschlecht',
-                Value:Geschlecht,
+                $Type: 'UI.ReferenceFacet', 
+                Label: 'Informationen zum Patienten', 
+                Target: '@UI.FieldGroup#Main'
             }
-        ]
-};
+        ],
+        
+
+FieldGroup#Main: {
+            Data: [
+                {Value: ID, ![@UI.Hidden] : true },
+                {Value: PatientenID },
+                {Value: Anrede_code},
+                {Value: Titel},
+                {Value: Vorname } ,  
+                {Value: Nachname },
+                {Value: GebDatum },
+                {Value: Geschlecht_code1},
+                {Value: VersichertenNr},
+                {Value: GesetzVers},
+                {Value: PatientNrKIS},
+                {Value: Strasse},
+                {Value: Hausnr},
+                {Value: Zusatz},
+                {Value: Postleitzahl},
+                {Value: Ort},
+                {Value: Postfach},
+                {Value: Land_code2},
+                {Value: Telefonnummer},
+                {Value: Mobilnummer},
+                {Value: Fax},
+                {Value: Email}
+               // {Value: Datenschutz1},
+               // {Value: LastChangedDatenschutz}
+            ]
+        },
+});

@@ -111,6 +111,7 @@
                         "settings": {
                             "entitySet": "GeraetSet",
                             "variantManagement": "Page",
+                            "initialLoad": "Enabled",
                             "navigation": {
                                 "GeraetSet": {
                                     "detail": {

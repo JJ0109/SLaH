@@ -106,6 +106,7 @@
                         "settings": {
                             "entitySet": "PatientenSet",
                             "variantManagement": "Page",
+                            "initialLoad": "Enabled",
                             "navigation": {
                                 "PatientenSet": {
                                     "detail": {

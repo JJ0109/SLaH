@@ -1,2 +1,2 @@
-﻿GeraeteIdUUID,GeraeteId,Betriebsstunden,Geraetestatus
-99999,9,15,Aktiv
+﻿GeraeteId,Betriebsstunden,Geraetestatus_code3
+1,15,Aktiv
