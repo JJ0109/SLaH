@@ -1,3 +1,3 @@
-﻿ID,GeraeteNr,Bezeichnung,Eigenschaften,Hersteller,Betriebsanleitung,Video
-11111,1,Data Logger,,Test,www.anleitung.de,www.video.de
+﻿GeraeteNr,Bezeichnung,Eigenschaften,Hersteller,Betriebsanleitung,Video
+1,Data Logger,,Test,www.anleitung.de,www.video.de
 
