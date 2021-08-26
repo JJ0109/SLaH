@@ -94,7 +94,8 @@ entity geraeteboxstatus : managed
 
 
 //Liste aller Geräte in einer Box 
-entity gverbindung{
+entity gverbindung 
+{
     key box      : Association to geraetebox;
     key geraetid : Association to geraeteid;  
 }
