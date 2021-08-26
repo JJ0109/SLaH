@@ -118,7 +118,7 @@ annotate catalogservice.GeraetSet with @UI : {
 
                 $Type  : 'UI.ReferenceFacet',
                 Label  : 'Geräte',
-                ID     : 'GeraeteDet',
+                ID     : 'GeraeteIdFacet',
                 Target : 'geraeteid/@UI.LineItem',
 
             /*![@UI.Hidden] : isDraft*/
@@ -130,10 +130,12 @@ annotate catalogservice.GeraetSet with @UI : {
 
 
 //ObjectPage - Tabelle der Geräte
-annotate catalogservice.GeraeteIdSet with @UI : {LineItem : [
+
+annotate catalogservice.GeraeteIdSet with @UI : {
+    LineItem                    : [
     {
         Label         : 'GUUID',
-        Value         : GeraeteId,
+        Value         : GeraeteIdUUID,
         ![@UI.Hidden] : true,
     },
     {
