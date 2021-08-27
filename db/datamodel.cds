@@ -4,7 +4,7 @@ using { managed, cuid, sap.common} from '@sap/cds/common';             //sap.com
 type Url : String;
 
 //Patientendaten 
-@odata.draft.enabled            //Ist für den Anlege- und Löschbutton zuständig
+//@odata.draft.enabled            //Ist für den Anlege- und Löschbutton zuständig
 entity patient : managed
 {
     key ID: UUID @(Core.Computed : true);
@@ -37,7 +37,7 @@ entity patient : managed
 
 
 //Gerätetypen
-@odata.draft.enabled    //Damit die Buttons funktionieren, musste ich die Bezeichnung "Key" vor der GeraeteNr entfernen
+//@odata.draft.enabled    //Damit die Buttons funktionieren, musste ich die Bezeichnung "Key" vor der GeraeteNr entfernen
 entity geraet : managed
 {
     key GeraeteUUID   : UUID        @(Core.Computed : true);
@@ -53,7 +53,7 @@ entity geraet : managed
 
 
 //Geräte
-@odata.draft.enabled    //Damit die Buttons funktionieren, musste ich die Bezeichnung "Key" vor der GeraeteId entfernen
+//@odata.draft.enabled    //Damit die Buttons funktionieren, musste ich die Bezeichnung "Key" vor der GeraeteId entfernen
 entity geraeteid : managed
 {
     key GeraeteIdUUID : UUID       @(Core.Computed : true); 

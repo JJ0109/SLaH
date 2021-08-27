@@ -1,6 +1,6 @@
 using catalogservice as service from '../../srv/slahservice';
 
-//using from '../../srv/common';
+using from '../../srv/common';
 
 
 //Masterpage - List Report
@@ -119,19 +119,39 @@ annotate catalogservice.GeraetSet with @UI : {
                 $Type  : 'UI.ReferenceFacet',
                 Label  : 'Geräte',
                 ID     : 'GeraeteIdFacet',
-                Target : 'geraeteid/@UI.LineItem',
+                Target: '@UI.LineItem#Test',
+                //Target : 'geraeteid/@UI.LineItem',
 
             /*![@UI.Hidden] : isDraft*/
 
             }
         ]
-    }]
+    }],
+
+    LineItem#Test : [
+        {
+            Label         : 'GUUID',
+            Value         : geraeteid.GeraeteIdUUID,
+            ![@UI.Hidden] : true
+        },
+        {
+            Label : 'GeräteId',
+            Value : geraeteid.GeraeteId,
+        },
+        {
+            Label : 'Stunden',
+            Value : geraeteid.Betriebsstunden,
+        },
+        {
+            Label : 'Status',
+            Value : geraeteid.Geraetestatus_code3,
+        },
+                    ],
 };
 
 
 //ObjectPage - Tabelle der Geräte
-
-annotate catalogservice.GeraeteIdSet with @UI : {
+/*annotate catalogservice.GeraeteIdSet with @UI : {
     LineItem                    : [
     {
         Label         : 'GUUID',
@@ -151,3 +171,4 @@ annotate catalogservice.GeraeteIdSet with @UI : {
         Value : Geraetestatus_code3,
     }
 ]};
+*/
