@@ -4,13 +4,22 @@ using { slah.db as slah } from '../db/datamodel';
 //@path: '/sap/opu/odata/sap/API_PATIENT'
 service catalogservice {
 
-@odata.draft.enabled
     entity PatientenSet        as projection on slah.patient;
-@odata.draft.enabled    
-    entity GeraetSet           as projection on slah.geraet;
-@odata.draft.enabled    
+        annotate  PatientenSet with @odata.draft.enabled;
+     
+ 
+   entity GeraetSet            as projection on slah.geraet;
+    annotate  GeraetSet with @odata.draft.enabled;
+
+  
     entity GeraeteIdSet        as projection on slah.geraeteid;
-    //entity GeraeteboxSet       as projection on slah.geraetebox;
+        annotate  GeraeteIdSet with @odata.draft.enabled;
+  
+    
+    entity GeraeteboxSet       as projection on slah.geraetebox;
+        annotate  GeraeteboxSet with @odata.draft.enabled;
+
+ //@odata.draft.enabled     
     //entity GeraeteboxStatusSet as projection on slah.geraeteboxstatus;
 }
 

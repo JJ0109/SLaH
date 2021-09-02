@@ -125,9 +125,19 @@ HeaderInfo          : {
 Facets: [
             {
                 $Type: 'UI.ReferenceFacet', 
-                Label: 'Informationen zum Patienten', 
+                Label: 'Allgemeine Informationen', 
                 Target: '@UI.FieldGroup#Main'
-            }
+            },      
+            {
+                $Type: 'UI.ReferenceFacet', 
+                Label: 'Adressdaten', 
+                Target: '@UI.FieldGroup#Main1'
+            },    
+            {
+                $Type: 'UI.ReferenceFacet', 
+                Label: 'Kontaktdaten', 
+                Target: '@UI.FieldGroup#Main2'
+            },   
         ],
         
 
@@ -135,15 +145,23 @@ FieldGroup#Main: {
             Data: [
                 {Value: ID, ![@UI.Hidden] : true },
                 {Value: PatientenID },
+                {Value: VersichertenNr},
+                {Value: PatientNrKIS},
                 {Value: Anrede_code},
                 {Value: Titel},
                 {Value: Vorname } ,  
                 {Value: Nachname },
                 {Value: GebDatum },
                 {Value: Geschlecht_code1},
-                {Value: VersichertenNr},
                 {Value: GesetzVers},
-                {Value: PatientNrKIS},
+               
+               // {Value: Datenschutz1},
+               // {Value: LastChangedDatenschutz}
+            ]
+        },
+
+FieldGroup#Main1: {
+            Data: [
                 {Value: Strasse},
                 {Value: Hausnr},
                 {Value: Zusatz},
@@ -151,12 +169,16 @@ FieldGroup#Main: {
                 {Value: Ort},
                 {Value: Postfach},
                 {Value: Land_code2},
+            ]
+        },        
+
+FieldGroup#Main2: {
+            Data: [
                 {Value: Telefonnummer},
                 {Value: Mobilnummer},
                 {Value: Fax},
                 {Value: Email}
-               // {Value: Datenschutz1},
-               // {Value: LastChangedDatenschutz}
             ]
         },
+
 });

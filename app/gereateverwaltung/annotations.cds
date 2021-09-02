@@ -38,24 +38,22 @@ annotate catalogservice.GeraetSet with @UI : {
     ],
 
     //Masterpage - Überschrift
-    HeaderInfo                 : {
-        TypeName       : 'Gerätetyp',
-        TypeNamePlural : 'Gerätetypen',
-        Title          : {
-            $Type : 'UI.DataField',
-            Value : GeraeteNr,
+ HeaderInfo: {
+            TypeName: 'Gerät',
+            TypeNamePlural: 'Geräte',
+            Title: { Value: GeraeteUUID },
+            Description: { Value: Bezeichnung }
         },
-        Description    : {
-            $Type : 'UI.DataField',
-            Value : Bezeichnung,
-        },
-    },
 
 
     //ObjectPage - Details zum Gerätetyp
     FieldGroup #GeraeteDetails : {
         $Type : 'UI.FieldGroupType',
         Data  : [
+                        {
+                $Type : 'UI.DataField',
+                Value : GeraeteUUID,
+            },
             {
                 $Type : 'UI.DataField',
                 Value : GeraeteNr,
@@ -113,14 +111,14 @@ annotate catalogservice.GeraetSet with @UI : {
                 Target : '@UI.FieldGroup#GeraeteDetails',
             },
 
-            //insert your reference facet enhancement here
+              //insert your reference facet enhancement here
             {
 
                 $Type  : 'UI.ReferenceFacet',
                 Label  : 'Geräte',
                 ID     : 'GeraeteIdFacet',
                 Target: '@UI.LineItem#Test',
-                //Target : 'geraeteid/@UI.LineItem',
+                //Target : 'geraeteid/@UI.LineItem#Geraet',
 
             /*![@UI.Hidden] : isDraft*/
 
@@ -128,14 +126,14 @@ annotate catalogservice.GeraetSet with @UI : {
         ]
     }],
 
-    LineItem#Test : [
+LineItem#Test : [
         {
-            Label         : 'GUUID',
+            Label         : 'Geräteid ID',
             Value         : geraeteid.GeraeteIdUUID,
             ![@UI.Hidden] : true
         },
         {
-            Label : 'GeräteId',
+            Label : 'Geräteidnr',
             Value : geraeteid.GeraeteId,
         },
         {
@@ -147,28 +145,7 @@ annotate catalogservice.GeraetSet with @UI : {
             Value : geraeteid.Geraetestatus_code3,
         },
                     ],
+
 };
 
 
-//ObjectPage - Tabelle der Geräte
-/*annotate catalogservice.GeraeteIdSet with @UI : {
-    LineItem                    : [
-    {
-        Label         : 'GUUID',
-        Value         : GeraeteIdUUID,
-        ![@UI.Hidden] : true,
-    },
-    {
-        $Type : 'UI.DataField',
-        Value : GeraeteId,
-    },
-    {
-        $Type : 'UI.DataField',
-        Value : Betriebsstunden,
-    },
-    {
-        $Type : 'UI.DataField',
-        Value : Geraetestatus_code3,
-    }
-]};
-*/

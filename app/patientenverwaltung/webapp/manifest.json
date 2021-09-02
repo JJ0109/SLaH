@@ -26,14 +26,14 @@
         },
         "crossNavigation": {
             "inbounds": {
-                "patientenverwaltung-inbound": {
+                "patientenverwaltung-display": {
                     "signature": {
                         "parameters": {},
                         "additionalParameters": "allowed"
                     },
-                    "semanticObject": "Patienten",
-                    "action": "Manage",
-                    "title": "Manage Patienten",
+                    "semanticObject": "Patient",
+                    "action": "display",
+                    "title": "Patientenverwaltung",
                     "subTitle": "",
                     "icon": ""
                 }
@@ -150,6 +150,6 @@
     },
     "sap.cloud": {
         "public": true,
-        "service": "Patientenmanager"
+        "service": "slah.service"
     }
 }

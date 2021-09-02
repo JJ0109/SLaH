@@ -1,7 +1,7 @@
 {
     "_version": "1.32.0",
     "sap.app": {
-        "id": "gereateverwaltung",
+        "id": "geraeteid",
         "type": "application",
         "i18n": "i18n/i18n.properties",
         "applicationVersion": {
@@ -23,21 +23,6 @@
         "sourceTemplate": {
             "id": "ui5template.fiorielements.v4.lrop",
             "version": "1.0.0"
-        },
-        "crossNavigation": {
-            "inbounds": {
-                "gereateverwaltung-display": {
-                    "signature": {
-                        "parameters": {},
-                        "additionalParameters": "allowed"
-                    },
-                    "semanticObject": "Geraete",
-                    "action": "display",
-                    "title": "Geraeteverwaltung",
-                    "subTitle": "",
-                    "icon": ""
-                }
-            }
         }
     },
     "sap.ui": {
@@ -88,50 +73,27 @@
             "routes": [
                 {
                     "pattern": ":?query:",
-                    "name": "GeraetSetList",
-                    "target": "GeraetSetList"
+                    "name": "GeraeteIdSetList",
+                    "target": "GeraeteIdSetList"
                 },
                 {
-                    "pattern": "GeraetSet({key}):?query:",
-                    "name": "GeraetSetObjectPage",
-                    "target": "GeraetSetObjectPage"
-                },
-                {
-                    "pattern": "GeraetSet({key})/geraeteid({key2}):?query:",
+                    "pattern": "GeraeteIdSet({key}):?query:",
                     "name": "GeraeteIdSetObjectPage",
                     "target": "GeraeteIdSetObjectPage"
                 }
             ],
             "targets": {
-                "GeraetSetList": {
+                "GeraeteIdSetList": {
                     "type": "Component",
-                    "id": "GeraetSetList",
+                    "id": "GeraeteIdSetList",
                     "name": "sap.fe.templates.ListReport",
                     "options": {
                         "settings": {
-                            "entitySet": "GeraetSet",
+                            "entitySet": "GeraeteIdSet",
                             "variantManagement": "Page",
                             "initialLoad": "Enabled",
                             "navigation": {
-                                "GeraetSet": {
-                                    "detail": {
-                                        "route": "GeraetSetObjectPage"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "GeraetSetObjectPage": {
-                    "type": "Component",
-                    "id": "GeraetSetObjectPage",
-                    "name": "sap.fe.templates.ObjectPage",
-                    "options": {
-                        "settings": {
-                            "editableHeaderContent": false,
-                            "entitySet": "GeraetSet",
-                            "navigation": {
-                                "geraeteid": {
+                                "GeraeteIdSet": {
                                     "detail": {
                                         "route": "GeraeteIdSetObjectPage"
                                     }

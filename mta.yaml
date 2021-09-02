@@ -1,42 +1,61 @@
-_schema-version: "3.2"
-ID: SLaH-1-1
-version: 0.0.1
+_schema-version: "3.1"
+ID: slah
+description: A simple CAP project.
+version: 1.0.0
 modules:
-- name: SLaH-1-1-destination-content
+- name: slah-srv
+  type: nodejs
+  path: gen/srv
+  requires:
+  - name: slah-uaa
+  provides:
+  - name: srv-api
+    properties:
+      srv-url: ${default-url}
+  parameters:
+    buildpack: nodejs_buildpack
+- name: slah-destinations
   type: com.sap.application.content
   requires:
-  - name: SLaH-1-1-destination-service
+  - name: slah-uaa
+    parameters:
+      service-key:
+        name: slah-uaa-key
+  - name: slah-html5-repo-host
+    parameters:
+      service-key:
+        name: slah-html5-repo-host-key
+  - name: srv-api
+  - name: slah-destination
     parameters:
       content-target: true
-  - name: SLaH-1-1_html_repo_host
-    parameters:
-      service-key:
-        name: SLaH-1-1_html_repo_host-key
-  - name: uaa_SLaH-1-1
-    parameters:
-      service-key:
-        name: uaa_SLaH-1-1-key
   parameters:
     content:
       instance:
         destinations:
-        - Name: Patientenmanager_SLaH_1_1_html_repo_host
-          ServiceInstanceName: SLaH-1-1-html5-app-host-service
-          ServiceKeyName: SLaH-1-1_html_repo_host-key
-          sap.cloud.service: Patientenmanager
         - Authentication: OAuth2UserTokenExchange
-          Name: Patientenmanager_uaa_SLaH_1_1
-          ServiceInstanceName: SLaH-1-1-xsuaa-service
-          ServiceKeyName: uaa_SLaH-1-1-key
-          sap.cloud.service: Patientenmanager
-        existing_destinations_policy: ignore
+          Name: slah-app-srv
+          TokenServiceInstanceName: slah-uaa
+          TokenServiceKeyName: slah-uaa-key
+          URL: ~{srv-api/srv-url}
+          sap.cloud.service: slah.service
+        - Name: slah-html5-repo-host
+          ServiceInstanceName: slah-html5-repo-host
+          ServiceKeyName: slah-html5-repo-host-key
+          sap.cloud.service: slah.service
+        - Authentication: OAuth2UserTokenExchange
+          Name: slah-uaa
+          ServiceInstanceName: slah-uaa
+          ServiceKeyName: slah-uaa-key
+          sap.cloud.service: slah.service
+        existing_destinations_policy: update
   build-parameters:
     no-source: true
-- name: SLaH-1-1-app-content
+- name: slah-app-content
   type: com.sap.application.content
   path: .
   requires:
-  - name: SLaH-1-1_html_repo_host
+  - name: slah-html5-repo-host
     parameters:
       content-target: true
   build-parameters:
@@ -71,7 +90,16 @@ modules:
     - npm run build:cf
     supported-platforms: []
 resources:
-- name: SLaH-1-1-destination-service
+- name: slah-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      tenant-mode: dedicated
+      xsappname: slah-${space}
+    path: ./xs-security.json
+    service: xsuaa
+    service-plan: application
+- name: slah-destination
   type: org.cloudfoundry.managed-service
   parameters:
     config:
@@ -87,20 +115,19 @@ resources:
           existing_destinations_policy: update
       version: 1.0.0
     service: destination
-    service-name: SLaH-1-1-destination-service
     service-plan: lite
-- name: SLaH-1-1_html_repo_host
+- name: slah-html5-repo-host
   type: org.cloudfoundry.managed-service
   parameters:
     service: html5-apps-repo
-    service-name: SLaH-1-1-html5-app-host-service
     service-plan: app-host
-- name: uaa_SLaH-1-1
-  type: org.cloudfoundry.managed-service
-  parameters:
-    path: ./xs-security.json
-    service: xsuaa
-    service-name: SLaH-1-1-xsuaa-service
-    service-plan: application
 parameters:
   deploy_mode: html5-repo
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm install --production
+    - npx -p @sap/cds-dk cds build --production
+    - npx rimraf gen/db/src/gen/data

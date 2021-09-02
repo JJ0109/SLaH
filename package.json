@@ -7,15 +7,22 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^5",
-    "express": "^4"
+    "@sap/xsenv": "^3.1.1",
+    "@sap/xssec": "^3.2.3",
+    "express": "^4",
+    "hdb": "^0.18.3"
   },
   "devDependencies": {
-    "@sap/ux-specification": "^1.90.4",
+    "@sap/ux-specification": "^1.90.7",
     "cds-swagger-ui-express": "^0.2.0",
     "sqlite3": "^5.0.2"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "scripts": {
-    "start": "cds run"
+    "start": "cds run",
+    "undeploy": "cf undeploy slah --delete-services --delete-service-keys"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",
@@ -50,10 +57,22 @@
         "credentials": {
           "database": "slah.db"
         }
+      },
+      "uaa": {
+        "kind": "xsuaa",
+        "credentials": {}
+      },
+      "hana": {
+        "deploy-format": "hdbtable"
       }
+    },
+    "hana": {
+      "deploy-format": "hdbtable"
     }
   },
   "sapux": [
+    "app/geraeteid",
+    "app/box",
     "app/patientenverwaltung",
     "app/gereateverwaltung"
   ]

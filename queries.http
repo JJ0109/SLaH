@@ -1,1 +1,4 @@
 GET http://localhost:4004/catalogservice/GeraetSet
+GET http://localhost:4004/catalogservice/PatientenSet
+GET http://localhost:4004/catalogservice/GeraetIdSet
+GET http://localhost:4004/catalogservice/GeraeteboxSet

@@ -1,7 +1,7 @@
 {
     "_version": "1.32.0",
     "sap.app": {
-        "id": "gereateverwaltung",
+        "id": "box",
         "type": "application",
         "i18n": "i18n/i18n.properties",
         "applicationVersion": {
@@ -23,21 +23,6 @@
         "sourceTemplate": {
             "id": "ui5template.fiorielements.v4.lrop",
             "version": "1.0.0"
-        },
-        "crossNavigation": {
-            "inbounds": {
-                "gereateverwaltung-display": {
-                    "signature": {
-                        "parameters": {},
-                        "additionalParameters": "allowed"
-                    },
-                    "semanticObject": "Geraete",
-                    "action": "display",
-                    "title": "Geraeteverwaltung",
-                    "subTitle": "",
-                    "icon": ""
-                }
-            }
         }
     },
     "sap.ui": {
@@ -88,66 +73,66 @@
             "routes": [
                 {
                     "pattern": ":?query:",
-                    "name": "GeraetSetList",
-                    "target": "GeraetSetList"
+                    "name": "GeraeteboxSetList",
+                    "target": "GeraeteboxSetList"
                 },
                 {
-                    "pattern": "GeraetSet({key}):?query:",
-                    "name": "GeraetSetObjectPage",
-                    "target": "GeraetSetObjectPage"
+                    "pattern": "GeraeteboxSet({key}):?query:",
+                    "name": "GeraeteboxSetObjectPage",
+                    "target": "GeraeteboxSetObjectPage"
                 },
                 {
-                    "pattern": "GeraetSet({key})/geraeteid({key2}):?query:",
-                    "name": "GeraeteIdSetObjectPage",
-                    "target": "GeraeteIdSetObjectPage"
+                    "pattern": "GeraeteboxSet({key})/patient({key2}):?query:",
+                    "name": "PatientenSetObjectPage",
+                    "target": "PatientenSetObjectPage"
                 }
             ],
             "targets": {
-                "GeraetSetList": {
+                "GeraeteboxSetList": {
                     "type": "Component",
-                    "id": "GeraetSetList",
+                    "id": "GeraeteboxSetList",
                     "name": "sap.fe.templates.ListReport",
                     "options": {
                         "settings": {
-                            "entitySet": "GeraetSet",
+                            "entitySet": "GeraeteboxSet",
                             "variantManagement": "Page",
                             "initialLoad": "Enabled",
                             "navigation": {
-                                "GeraetSet": {
+                                "GeraeteboxSet": {
                                     "detail": {
-                                        "route": "GeraetSetObjectPage"
+                                        "route": "GeraeteboxSetObjectPage"
                                     }
                                 }
                             }
                         }
                     }
                 },
-                "GeraetSetObjectPage": {
+                "GeraeteboxSetObjectPage": {
                     "type": "Component",
-                    "id": "GeraetSetObjectPage",
+                    "id": "GeraeteboxSetObjectPage",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings": {
                             "editableHeaderContent": false,
-                            "entitySet": "GeraetSet",
+                            "entitySet": "GeraeteboxSet",
                             "navigation": {
-                                "geraeteid": {
+                                "patient": {
                                     "detail": {
-                                        "route": "GeraeteIdSetObjectPage"
+                                        "route": "PatientenSetObjectPage"
                                     }
                                 }
                             }
                         }
                     }
                 },
-                "GeraeteIdSetObjectPage": {
+                "PatientenSetObjectPage": {
                     "type": "Component",
-                    "id": "GeraeteIdSetObjectPage",
+                    "id": "PatientenSetObjectPage",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings": {
                             "editableHeaderContent": false,
-                            "entitySet": "GeraeteIdSet"
+                            "entitySet": "PatientenSet"
                         }
                     }
                 }
