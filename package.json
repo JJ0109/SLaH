@@ -1,79 +1,82 @@
 {
-  "name": "slah",
-  "version": "1.0.0",
-  "description": "A simple CAP project.",
-  "repository": "<Add your repository here>",
-  "license": "UNLICENSED",
-  "private": true,
-  "dependencies": {
-    "@sap/cds": "^5",
-    "@sap/xsenv": "^3.1.1",
-    "@sap/xssec": "^3.2.3",
-    "express": "^4",
-    "hdb": "^0.18.3"
-  },
-  "devDependencies": {
-    "@sap/ux-specification": "^1.90.7",
-    "cds-swagger-ui-express": "^0.2.0",
-    "sqlite3": "^5.0.2"
-  },
-  "engines": {
-    "node": ">=14"
-  },
-  "scripts": {
-    "start": "cds run",
-    "undeploy": "cf undeploy slah --delete-services --delete-service-keys"
-  },
-  "eslintConfig": {
-    "extends": "eslint:recommended",
-    "env": {
-      "es2020": true,
-      "node": true,
-      "jest": true,
-      "mocha": true
+    "name": "slah",
+    "version": "1.0.0",
+    "description": "A simple CAP project.",
+    "repository": "<Add your repository here>",
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+        "@sap/cds": "^5",
+        "@sap/xsenv": "^3.1.1",
+        "@sap/xssec": "^3.2.3",
+        "express": "^4",
+        "hdb": "^0.18.3",
+        "passport": "^0.5.0"
     },
-    "globals": {
-      "SELECT": true,
-      "INSERT": true,
-      "UPDATE": true,
-      "DELETE": true,
-      "CREATE": true,
-      "DROP": true,
-      "CDL": true,
-      "CQL": true,
-      "CXL": true,
-      "cds": true
+    "devDependencies": {
+        "@sap/hdi-deploy": "^4.2.0",
+        "@sap/ux-specification": "^1.90.7",
+        "cds-swagger-ui-express": "^0.2.0",
+        "sqlite3": "^5.0.2"
     },
-    "rules": {
-      "no-console": "off",
-      "require-atomic-updates": "off"
-    }
-  },
-  "cds": {
-    "requires": {
-      "db": {
-        "kind": "sqlite",
-        "model": "*",
-        "credentials": {
-          "database": "slah.db"
+    "engines": {
+        "node": ">=14"
+    },
+    "scripts": {
+        "start": "cds run",
+        "undeploy": "cf undeploy slah --delete-services --delete-service-keys"
+    },
+    "eslintConfig": {
+        "extends": "eslint:recommended",
+        "env": {
+            "es2020": true,
+            "node": true,
+            "jest": true,
+            "mocha": true
+        },
+        "globals": {
+            "SELECT": true,
+            "INSERT": true,
+            "UPDATE": true,
+            "DELETE": true,
+            "CREATE": true,
+            "DROP": true,
+            "CDL": true,
+            "CQL": true,
+            "CXL": true,
+            "cds": true
+        },
+        "rules": {
+            "no-console": "off",
+            "require-atomic-updates": "off"
         }
-      },
-      "uaa": {
-        "kind": "xsuaa",
-        "credentials": {}
-      },
-      "hana": {
-        "deploy-format": "hdbtable"
-      }
     },
-    "hana": {
-      "deploy-format": "hdbtable"
-    }
-  },
-  "sapux": [
-    "app/geraeteid",
-    "app/box",
-    "app/patientenverwaltung",
-    "app/gereateverwaltung"
-  ]
+    "cds": {
+        "build": {
+            "target": "."
+        },
+        "requires": {
+            "db": {
+                "kind": "hana"
+            },
+            "hana": {
+                "deploy-format": "hdtable"
+            },
+            "auth": {
+                "strategy": "dummy"
+            }
+        },
+        "hana": {
+            "deploy-format": "hdbtable"
+        }
+    },
+                "uaa": {
+                "kind": "xsuaa"
+            },
+    "sapux": [
+        "app/geraeteid",
+        "app/box",
+        "app/patientenverwaltung",
+        "app/gereateverwaltung"
+    ]
 }

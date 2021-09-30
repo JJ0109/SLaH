@@ -5,15 +5,23 @@ version: 1.0.0
 modules:
 - name: slah-srv
   type: nodejs
-  path: gen/srv
+  path: srv
   requires:
+  - name: slah-db
   - name: slah-uaa
-  provides:
-  - name: srv-api
-    properties:
-      srv-url: ${default-url}
   parameters:
-    buildpack: nodejs_buildpack
+    host: $(appname)
+  build-parameters:
+    ignore: {".env", "./node_modules"}    
+- name: slah-db-deployer
+  type: hdb 
+  path: db 
+  requires:
+    - name: slah-db
+  parameters:
+    buildpack: modejs_buildpack
+  build-parameters:
+    ignore: [".env", "./node_modules"]    
 - name: slah-destinations
   type: com.sap.application.content
   requires:
@@ -112,6 +120,13 @@ resources:
             ProxyType: Internet
             Type: HTTP
             URL: https://ui5.sap.com
+          - Name: hana-app-api
+            Authentication: NoAuthentication
+            ProxyType: Internet
+            HTML5.ForwardAuthToken: true
+            HTML5.DynamicDestination: true
+            Type: HTTP
+            URL: https://${appname}.${default-domain}
           existing_destinations_policy: update
       version: 1.0.0
     service: destination
@@ -124,6 +139,7 @@ resources:
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true
+  appname: unique-1860
 build-parameters:
   before-all:
   - builder: custom
